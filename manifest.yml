@@ -4,6 +4,6 @@ applications:
   instances: 1
   name: citibike-capstone
   routes:
-  - route: erichensley-capstone.mybluemix.net
+  - route: citibike-capstone.mybluemix.net
   disk_quota: 1024M
   buildpack: python_buildpack
