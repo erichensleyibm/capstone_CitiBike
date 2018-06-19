@@ -17,6 +17,12 @@ import datetime
 from flask import Flask, render_template, request
 from flask_table import Table, Col
 app = Flask(__name__)
+VCAP_SERVICES = os.getenv("VCAP_SERVICES")
+
+@app.route('/')
+def Welcome():
+    # Set global variables
+    return render_template('index.html', test = VCAP_SERVICES)
 
 port = os.getenv('PORT', '5000')
 if __name__ == "__main__":
