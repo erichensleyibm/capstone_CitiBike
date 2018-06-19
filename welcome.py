@@ -242,8 +242,14 @@ def pred_time():
     data['distance'] = distance
     data['age'] = age
     data['agesqr'] = age ** 2
-    data['label_%s' % (event[-1].replace('"',''))] = 1
-    data['condition_%s' % (cond[-1].replace('"',''))] = 1
+    if 'label_%s' % (event[-1].replace('"','')) in list(data):
+        data['label_%s' % (event[-1].replace('"',''))] = 1
+    else:
+        raise ValueError('label_%s' % (event[-1].replace('"','')))
+    if 'condition_%s' % (cond[-1].replace('"','')) in list(data):
+        data['condition_%s' % (cond[-1].replace('"',''))] = 1
+    else:
+        raise ValueError('condition_%s' % (cond[-1].replace('"','')))
     data['gender_%s' % (gender)] = 1
     data['user_%s' % (user)] = 1
     use_hour = str(pred_date.hour)
