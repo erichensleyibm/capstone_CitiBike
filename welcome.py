@@ -16,17 +16,6 @@ import requests
 import datetime
 from flask import Flask, render_template, request
 from flask_table import Table, Col
-#app = Flask(__name__)
-#VCAP_SERVICES = os.getenv("VCAP_SERVICES")
-#
-#@app.route('/')
-#def Welcome():
-#    # Set global variables
-#    return render_template('index.html', start_station = VCAP_SERVICES, age = 24)
-#
-#port = os.getenv('PORT', '5000')
-#if __name__ == "__main__":
-#    app.run(host='0.0.0.0', port=int(port))  
 from lxml import html
 import mysql.connector
 import pandas as pd
@@ -105,7 +94,9 @@ def Welcome():
     start_lat = start[2]
     start_lon = start[3]
     cnx.close()
-    return render_template('index.html', test = VCAP_SERVICES, start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"')
+    
+    start_station = str(lat)+'__'+str(lon)
+    return render_template('index.html', start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"')
 
 @app.route('/pred_time', methods=['GET', 'POST'])
 def pred_time():
