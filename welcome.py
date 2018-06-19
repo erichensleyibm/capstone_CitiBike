@@ -75,9 +75,12 @@ def Welcome():
     end_station = 'Destination'
     
     # Pull client's IP from behind Bluemix proxy
-    client_url = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
-    # Find latitude and longitude of IP address
-    send_url = 'http://freegeoip.net/json'#+client_url
+    public_ips = str(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)).split(',')
+    if len(public_ips) == 0:
+        ip = request.environ['REMOTE_ADDR']
+    else:
+        ip = public_ips[0]    # Find latitude and longitude of IP address
+    send_url = 'http://freegeoip.net/json'+ip
     r = requests.get(send_url)
     j = json.loads(r.text)
     lat = j['latitude']
@@ -96,13 +99,6 @@ def Welcome():
     start_lon = start[3]
     cnx.close()
         
-    public_ips = str(request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)).split(',')
-    if len(public_ips) == 0:
-        ip = request.environ['REMOTE_ADDR']
-    else:
-        ip = public_ips[0]
-        
-    start_station = ip
     return render_template('index.html', start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"')
 
 @app.route('/pred_time', methods=['GET', 'POST'])
