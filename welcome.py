@@ -16,18 +16,17 @@ import requests
 import datetime
 from flask import Flask, render_template, request
 from flask_table import Table, Col
-app = Flask(__name__)
-VCAP_SERVICES = os.getenv("VCAP_SERVICES")
-
-@app.route('/')
-def Welcome():
-    # Set global variables
-    return render_template('index.html', start_station = VCAP_SERVICES, age = 24)
-
-port = os.getenv('PORT', '5000')
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=int(port))
-    
+#app = Flask(__name__)
+#VCAP_SERVICES = os.getenv("VCAP_SERVICES")
+#
+#@app.route('/')
+#def Welcome():
+#    # Set global variables
+#    return render_template('index.html', start_station = VCAP_SERVICES, age = 24)
+#
+#port = os.getenv('PORT', '5000')
+#if __name__ == "__main__":
+#    app.run(host='0.0.0.0', port=int(port))  
 from lxml import html
 import mysql.connector
 import pandas as pd
@@ -41,17 +40,18 @@ DB_NAME = 'citibike'
 PASSWORD = 'ibm1234'
 HOST = '207.38.142.196'
 
+app = Flask(__name__)
 VCAP_SERVICES = os.getenv("VCAP_SERVICES")
-#if VCAP_SERVICES is not None:
+if VCAP_SERVICES is not None:
     # These will be automatically set if deployed to IBM Cloud
-#    SERVICES = json.loads(VCAP_SERVICES)
+    SERVICES = json.loads(VCAP_SERVICES)
     # set path when deployed to Bluemix so the same references to other folders can be made as when local
-cur_path = '/home/vcap/app'
-#else:
+    cur_path = '/home/vcap/app'
+else:
     # start with current path
-#    cur_path = os.path.abspath(__file__)
-#    while cur_path.split('/')[-1] != 'capstone':
-#        cur_path = os.path.abspath(os.path.join(cur_path, os.pardir))
+    cur_path = os.path.abspath(__file__)
+    while cur_path.split('/')[-1] != 'capstone':
+        cur_path = os.path.abspath(os.path.join(cur_path, os.pardir))
       
 def conv_time(time_, month_, day_):
     # funtion for scraping time values
