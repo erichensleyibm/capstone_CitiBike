@@ -22,7 +22,7 @@ VCAP_SERVICES = os.getenv("VCAP_SERVICES")
 @app.route('/')
 def Welcome():
     # Set global variables
-    return render_template('index.html', test = VCAP_SERVICES)
+    return render_template('index.html', test = VCAP_SERVICES, start_station = 'W 82 St & Central Park West', age = 24)
 
 port = os.getenv('PORT', '5000')
 if __name__ == "__main__":
