@@ -1,0 +1,9 @@
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  name: erichensley-capstone
+  routes:
+  - route: erichensley-capstone.mybluemix.net
+  disk_quota: 1024M
+  buildpack: python_buildpack
