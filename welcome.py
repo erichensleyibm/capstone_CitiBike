@@ -278,7 +278,7 @@ def pred_time():
     pred_travel /= 60
 #    pred_travel = data
     # '%.2f' % (pred_travel)
-    return render_template('index_2.html', predict = pred_travel, start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"', weather_info = weather_info)
+    return render_template('index_2.html', predict = '%.2f' % (pred_travel), start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"', weather_info = weather_info)
 
 class WeatherTable(Table):
     # set class id and table values
