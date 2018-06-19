@@ -1,8 +1,8 @@
 applications:
 - path: .
-  memory: 128M
+  memory: 256M
   instances: 1
-  name: erichensley-capstone
+  name: citibike-capstone
   routes:
   - route: erichensley-capstone.mybluemix.net
   disk_quota: 1024M
