@@ -33,21 +33,17 @@ HOST = '207.38.142.196'
 app = Flask(__name__)
 
 VCAP_SERVICES = os.getenv("VCAP_SERVICES")
-if VCAP_SERVICES is not None:
+#if VCAP_SERVICES is not None:
     # These will be automatically set if deployed to IBM Cloud
-    SERVICES = json.loads(VCAP_SERVICES)
+#    SERVICES = json.loads(VCAP_SERVICES)
     # set path when deployed to Bluemix so the same references to other folders can be made as when local
-    cur_path = '/home/vcap/app'
-else:
+cur_path = '/home/vcap/app'
+#else:
     # start with current path
-    cur_path = os.path.abspath(__file__)
-    while cur_path.split('/')[-1] != 'capstone':
-        cur_path = os.path.abspath(os.path.join(cur_path, os.pardir))
-
-# location to data is now the same for both local and Bluemix deployment
-data_folder = os.path.join(cur_path, 'data')       
-
-
+#    cur_path = os.path.abspath(__file__)
+#    while cur_path.split('/')[-1] != 'capstone':
+#        cur_path = os.path.abspath(os.path.join(cur_path, os.pardir))
+      
 def conv_time(time_, month_, day_):
     # funtion for scraping time values
     _time = []
@@ -100,7 +96,7 @@ def Welcome():
     start_lat = start[2]
     start_lon = start[3]
     cnx.close()
-    return render_template('index.html', start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"')
+    return render_template('index.html', test = VCAP_SERVICES, start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"')
 
 @app.route('/pred_time', methods=['GET', 'POST'])
 def pred_time():
