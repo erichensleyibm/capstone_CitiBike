@@ -96,7 +96,7 @@ def Welcome():
     start_lon = start[3]
     cnx.close()
         
-    start_station = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)[0] 
+    start_station = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
     return render_template('index.html', start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"')
 
 @app.route('/pred_time', methods=['GET', 'POST'])
