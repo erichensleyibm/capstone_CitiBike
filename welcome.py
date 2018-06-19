@@ -216,7 +216,7 @@ def pred_time():
         import re
         event = ['"None"' if i.encode('ascii', 'ignore').decode('ascii') == '' else i for i in event]
         event = [re.sub(r"[\\n\\t\s]*", "", i) for i in event]
-        event = ['"None"' if i.encode('ascii', 'ignore').decode('ascii') == '\xa0' else i for i in event]
+        event = ['"None"' if i.encode('ascii', 'ignore').decode('ascii') == '' else i for i in event]
             
     cond = tree.xpath('//tr[@class="no-metars"]/td[%i]/text()' % (headers.index('conditions')))
     cond = ['"'+str(i)+'"' for i in cond]
