@@ -96,7 +96,7 @@ def Welcome():
     cnx.close()
     
 #    start_station = str(lat)+'__'+str(lon)
-    start_station = request.environ['REMOTE_ADDR']
+    start_station = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)   
     
     return render_template('index.html', start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"')
 
