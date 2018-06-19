@@ -17,7 +17,6 @@ import datetime
 from flask import Flask, render_template, request
 from lxml import html
 import mysql.connector
-global DB_NAME
 import pandas as pd
 from sklearn.externals import joblib
 from flask_table import Table, Col
