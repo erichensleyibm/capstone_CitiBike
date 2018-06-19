@@ -259,8 +259,11 @@ def pred_time():
     weather_info = WeatherTable(_weather)
     
     # Load previously trained Linear Regression Model
-    model = joblib.load(os.path.join(cur_path, 'models', 'citi_bike_pred.pkl'))
-    
+    try:
+        model = joblib.load(os.path.join(cur_path, 'models', 'citi_bike_pred.pkl'))
+    except:
+        model = joblib.load(os.path.join(cur_path, 'models', 'citi_bike_pred_py2.pkl'))
+          
     # Divide time by 60 to convert to minutes
     pred_travel = model.predict(data)[0]/60
     return render_template('index_2.html', predict = '%.2f' % (pred_travel), start_station = '"'+start_station+'"', age = age, end_station = '"'+end_station+'"', weather_info = weather_info)
