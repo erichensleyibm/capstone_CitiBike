@@ -12,19 +12,20 @@
 
 import json
 import os
+import requests
+import datetime
+from flask import Flask, render_template, request
+from flask_table import Table, Col
+app = Flask(__name__)
 
 port = os.getenv('PORT', '5000')
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(port))
     
-import requests
-import datetime
-from flask import Flask, render_template, request
 from lxml import html
 import mysql.connector
 import pandas as pd
 from sklearn.externals import joblib
-from flask_table import Table, Col
 
 global DB_NAME
 global PASSWORD
@@ -33,8 +34,6 @@ global HOST
 DB_NAME = 'citibike'
 PASSWORD = 'ibm1234'
 HOST = '207.38.142.196'
-
-app = Flask(__name__)
 
 VCAP_SERVICES = os.getenv("VCAP_SERVICES")
 #if VCAP_SERVICES is not None:
