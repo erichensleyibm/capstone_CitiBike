@@ -210,7 +210,7 @@ def pred_time():
     prec = [0 if i == 'N/A' else i for i in prec]            
     event = tree.xpath('//tr[@class="no-metars"]/td[%i]/text()' % (headers.index('events')))
     event = [i.replace('\n', '') for i in event]
-    event = ['"None"' if i == '\t\xa0' else '"'+str(i)+'"' for i in event]
+    event = ['"None"' if str(i) == '\t\xa0' else '"'+str(i)+'"' for i in event]
     cond = tree.xpath('//tr[@class="no-metars"]/td[%i]/text()' % (headers.index('conditions')))
     cond = ['"'+str(i)+'"' for i in cond]
         
