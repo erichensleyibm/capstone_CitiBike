@@ -80,7 +80,7 @@ def Welcome():
         ip = request.environ['REMOTE_ADDR']
     else:
         ip = public_ips[0]    # Find latitude and longitude of IP address
-    send_url = 'http://freegeoip.net/json'+ip
+    send_url = 'http://freegeoip.net/json/'+ip
     r = requests.get(send_url)
     j = json.loads(r.text)
     lat = j['latitude']
